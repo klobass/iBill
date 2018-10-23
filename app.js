@@ -18,15 +18,14 @@ app.use(bodyParser.json({ extended: false }));
 
 // /track POST route
 app.post('/track', (request, response) => {
-    postBody =request.body;
-    console.log (postBody);
-        if ( postBody.count ){
-        client.incrby("count", + postBody.count )}; // add count from json to redis
-    fs.readFile (file, 'utf-8', function readFileCallback(err,data){
-        if (err) console.log(err);
+    postBody = request.body;                                                    // receive POST data
+    if ( postBody.count ){                                                      // if there is "count" key
+      client.incrby("count", + postBody.count )};                               // add its value from to redis
+    fs.readFile (file, 'utf-8', function readFileCallback(err,data){            // appending data by reading old file
+    if (err) console.log(err);
     var obj=JSON.parse(data);
-    obj.data.push (postBody);
-    fs.writeFile(file, JSON.stringify(obj), 'utf-8', function(err){
+    obj.data.push (postBody);                                                   // adding new JSON data to old JSON data
+    fs.writeFile(file, JSON.stringify(obj), 'utf-8', function(err){             // and writing it back to file
         if (err) console.log(err);
         else response.status(200).end();
         });
@@ -36,16 +35,9 @@ app.post('/track', (request, response) => {
 // /count GET route
 app.get('/count', (request, response) => {
  client.get ("count", function(err,reply){
-            if(!reply){             // if no "count" in Redis
-                response.status(404).send('NotFound').end();
-                console.log('There is no count yet...');
-            }
-            else {
-                response.status(200).send(+reply);
-                console.log('Count is ' + reply);
-            }
-        });
+   if(!reply){response.status(404).send('There is no count yet...').end()};     // if there is no "count" defined in Redis let user know
+   else {response.status(200).send(+reply)};
+  });
 });
-
 
 app.listen(port, () => console.info('Application running on port ' + port));
