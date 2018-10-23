@@ -6,10 +6,10 @@ Version
 Usage
 Make sure you have Redis installed and running
 
-Install Dependencies
-
+-Install Dependencies
 $ npm install
-Run Server
 
+-Run Server
 $ npm start
-Visit http://localhost:4000
+
+-Visit http://localhost:4000
