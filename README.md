@@ -1,15 +1,16 @@
-Backend test app using Node.js and Redis
+# Backend test app using Node.js and Redis #
 
-Version
+## Version ##
 1.1.0
 
-Usage
-Make sure you have Redis installed and running
+## Usage ##
+* Make sure you have Redis installed and running
 
--Install Dependencies
+* Install Dependencies
 $ npm install
 
--Run Server
+* Run Server
 $ npm start
 
--Visit http://localhost:4000
+* Visit 
+http://localhost:4000
