@@ -20,7 +20,7 @@ app.use(bodyParser.json({ extended: false }))
 app.post('/track', (request, response) => {
     postBody = request.body                                                     // receive POST data
     if (postBody.count){                                                        // if there is "count" key
-        client.incrby("count", + postBody.count )}                              // add its value from to redis
+        client.incrby("count", + postBody.count )}                              // add its value to redis
     fs.readFile (file, 'utf-8', function readFileCallback(err,data){            // appending data by reading old file
         if (err) console.log(err)                                               // ?? should this also create/fix file ??
     var obj=JSON.parse(data)
@@ -34,9 +34,9 @@ app.post('/track', (request, response) => {
 
 // ----- GET /count part -----
 app.get('/count', (request, response) => {
-    client.get ("count", function(err,reply){                                   // ask Redis for "count"
-        if (!reply) {response.status(404).send('No count yet...').end()}        // if there is no "count" defined in Redis let user know
-        else response.status(200).send(+reply)                                  // if there is send its value back
+    client.get ("count", function(err,reply){                                   // ask Redis for value of "count"
+        if (!reply) {response.status(404).send('No count yet...').end()}        // if there is no "count" defined yet in Redis let user know
+        else response.status(200).send(+reply)                                  // if there is return its value
     })
 })
 
