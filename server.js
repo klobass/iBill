@@ -10,7 +10,11 @@ const app = express()
 // Redis Client
 let client = redis.createClient()
 
-client.on('connect', function(){
+client.on("error", function (err) {                                             // Let us know whats wrong with Redis - if theres something
+    console.log("Error " + err)
+})
+
+client.on('connect', function(){                                                // Announce succesfull Redis connection
     console.log('Connected to Redis...')
 })
 
