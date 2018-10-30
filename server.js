@@ -25,8 +25,8 @@ client.on('connect', function(){                                                
 // ----- POST /track part -----
 app.post('/track', function (req, res){                                             // receive POST data
     postBody = req.body                                               
-         if (postBody.count){                                                        // if there is "count" key
-             client.incrby("count", + postBody.count )}                              // add its value to redis
+         if (postBody.count){                                                       // if there is "count" key
+             client.incrby("count", + postBody.count )}                             // add its value to redis
     fs.readFile (file, 'utf-8', function readFileCallback(err,data){                // appending data by reading old file
         if (err) console.log(err)
     var obj=JSON.parse(data)
@@ -53,4 +53,9 @@ if (fs.existsSync(file)) {}
             fs.writeFileSync (file, `{"data": []}`,'utf-8')}
 
 // ----- start app -----
-app.listen(port, () => console.info('Application running on port ' + port))
+// app.listen(port, () => console.log('Application running on port ' + port))
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log('Application running on port ' + port)
+    })
+}
