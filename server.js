@@ -53,9 +53,13 @@ if (fs.existsSync(file)) {}
             fs.writeFileSync (file, `{"data": []}`,'utf-8')}
 
 // ----- start app -----
-// app.listen(port, () => console.log('Application running on port ' + port))
-if (require.main === module) {
-    app.listen(port, () => {
-        console.log('Application running on port ' + port)
-    })
-}
+app.listen(port, () => console.log('Application running on port ' + port))
+
+// if (require.main === module) {
+//     app.listen(port, () => {
+//         console.log('Application running on port ' + port)
+//     })
+// }
+
+
+// module.exports = app
