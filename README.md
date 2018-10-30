@@ -11,6 +11,3 @@ $ npm install
 
 * Run Server
 $ npm start
-
-* Visit 
-http://localhost:4000
